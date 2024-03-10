@@ -16,7 +16,13 @@ const routes = (app: Express) => {
     app.get('/users/profile', auth, userController.findById);
     app.get('/users/:id', userController.findById);
     app.post('/login/', userController.login);
-    app.post('/event', validateSchema(eventSchema), eventController.create);
+    //Events
+    app.post('/event', auth, validateSchema(eventSchema), eventController.create);
+    app.get('/event', eventController.getEvents);
+    app.get('/event/:id', eventController.getById);
+    app.put('/event/:id', auth, eventController.update);
+    app.delete('/event/:id', auth, eventController.delete);
+    
 };
 
 export default routes;
