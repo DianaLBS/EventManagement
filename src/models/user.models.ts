@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, required: true, index: true, unique: true},
     password: {type: String, required: true},
+    roles:[{ref: "Role", type: mongoose.Schema.Types.ObjectId, required: true}]
 }, {timestamps: true, collection: "users"} );
 
 const User = mongoose.model<UserDocument>("User", userSchema);

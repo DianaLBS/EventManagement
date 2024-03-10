@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import userService from "../services/user.service";
+import Role from "../models/role.models";
 import { UserDocument, UserInput } from "../models/user.models";
 import bcrypt from "bcrypt";
 
@@ -14,9 +15,13 @@ class userController {
             if(userExists){
                 return res.status(400).json({message: "User already exists"});
             }
+            const foundRole = await Role.find({name:{$in: req.body.roles}})
+            if(foundRole.length === 0){
+                return res.status(400).json({message: "Role isn't valid"});
+            }
+            req.body.roles= foundRole.map(role => role._id);
 
             const user: UserDocument = await userService.create(req.body as UserInput)
-
             return res.status(201).json(user);
 
         } catch(error) {
