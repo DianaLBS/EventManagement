@@ -2,6 +2,7 @@ import { Express } from "express";
 
 import userController from "../controllers/user.controller";
 import auth from "../middlewares/auth";
+import eventController from "../controllers/event.controller";
 //import validateRole from "../middlewares/validateRole";
 import validateSchema from "../middlewares/validateSchema";
 import  userSchema  from "../schemas/user.schema";
@@ -14,6 +15,7 @@ const routes = (app: Express) => {
     app.get('/users/profile', auth, userController.findById);
     app.get('/users/:id', userController.findById);
     app.post('/login/', userController.login);
+    app.post('/event') , 
 };
 
 export default routes;
