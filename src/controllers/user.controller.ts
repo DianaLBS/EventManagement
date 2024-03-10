@@ -92,13 +92,13 @@ class userController {
             const userExists: UserDocument | null = await userService.findByEmail(req.body.email);
 
             if(!userExists){
-                return res.status(401).json({message: "Not authorized"});
+                return res.status(401).json({message: "User not found"});
             }
 
             const isMatch:boolean  = await bcrypt.compare(req.body.password, userExists.password);
 
             if(!isMatch){
-                return res.status(401).json({message: "Not authorized"});
+                return res.status(401).json({message: "Incorrect password"});
             }
             
             return res.status(200).json( userService.generateToken(userExists));

@@ -2,6 +2,7 @@ import { Express } from "express";
 
 import userController from "../controllers/user.controller";
 import auth from "../middlewares/auth";
+//import validateRole from "../middlewares/validateRole";
 import validateSchema from "../middlewares/validateSchema";
 import  userSchema  from "../schemas/user.schema";
 
