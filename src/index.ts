@@ -1,5 +1,7 @@
 import express, {Express, Request, Response} from "express";
 import dotenv from 'dotenv';
+import {db} from './config/db';
+
 const app: Express = express();
 dotenv.config();
 
@@ -20,6 +22,9 @@ app.post('/about', (req,res)=>{
     res.send('name: '+ req.body.name);
 })
 
-app.listen(port,()=>{
-    console.log('Server is running on port ' + port);
-});
+db.then( () => {
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`)
+        
+    })
+} );
