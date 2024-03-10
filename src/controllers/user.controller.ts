@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 /**
  * Controlador para la gestión de usuarios.
  */
-class userController {
+class UserController {
     
     /**
      * Crea un nuevo usuario.
@@ -164,4 +164,4 @@ class userController {
 
 }
 
-export default new userController();
+export default new UserController();

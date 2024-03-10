@@ -6,6 +6,7 @@ import eventController from "../controllers/event.controller";
 //import validateRole from "../middlewares/validateRole";
 import validateSchema from "../middlewares/validateSchema";
 import  userSchema  from "../schemas/user.schema";
+import  eventSchema  from "../schemas/event.schema";
 
 const routes = (app: Express) => {
     app.get('/users', userController.getUsers);
@@ -15,7 +16,7 @@ const routes = (app: Express) => {
     app.get('/users/profile', auth, userController.findById);
     app.get('/users/:id', userController.findById);
     app.post('/login/', userController.login);
-    app.post('/event') , 
+    app.post('/event', validateSchema(eventSchema), eventController.create);
 };
 
 export default routes;
