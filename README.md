@@ -15,16 +15,16 @@
 Proceso de desarrollo:
 
 •	**Configuración del proyecto:** Para poder iniciar con un proyecto de NodeJS junto con el framework Express debemos ejecutar el comando “npm init”. Con la inicialización agregamos las diferentes carpetas dentro del paquete “src” con el fin de seguir con la instalación de Express en el proyecto (para poder instalar express se usó “npm i express”). La estructura de carpetas usada en el paquete “src” fue:
-![alt text](image-3.png)
+![alt text](images/image-3.png)
  
 Con el framework dentro del proyecto, pasamos a instalar las siguientes dependencias, con el fin de poder cumplir con los requerimientos de comunicación con la base de datos no relacional (Mongodb), autentificación y autorización de usuarios y seguridad e encriptación en los datos. 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
  
 Para instalar cada una de las dependencias se tuvo que usar el comando “npm i” (para instalar la dependencia) y “npm -D” (para instalar la dependencia como dependencia de desarrollo en el proyecto).
 
 •	**Conexión con base de datos MongoDB:**. Para poder garantizar la conexión con MongoDB fue necesario agregar las dependencias “mongoose” y “mongodb”. Además de agregar el driver de conexión en el archivo “.env”. Con este driver, damos los permisos en el proyecto para acceder a la base de datos y poder realizar las operaciones CRUD sobre los usuarios y eventos. La configuración del “.env” es usada en el archivo “db.ts” donde se inicia la conexión a MongoDB.  
- ![alt text](image-1.png)
-![alt text](image-2.png)
+ ![alt text](images/image-1.png)
+![alt text](images/image-2.png)
  
 **Nota:** Para verificar el funcionamiento con MongoDB se recomienda usar su propia base de datos y driver de conexión. 
 
@@ -64,10 +64,15 @@ o	Ejecutar el comando “npm run dev”, este sirve para ver la ejecución final
 
 •	Las rutas definidas en el proyecto para acceder a las funcionalidades del API RESTful son:
 
-![alt text](image.png)
+![alt text](images/imagen-rutas.png)
  
 Estas siguen el estándar solicitado por el docente en la consigna del taller.
 
+### **Pruebas:**
+
+* Para comprobar el funcionamiento de nuestra aplicación web, se vio la necesidad de probar sus funcionalidades con la herramienta "Postman". Esta permite visualizar la respuesta HTTP que se hace al cliente. En esta herramienta probamos los diferentes métodos HTTP (get,post,put,delete) adaptados al contexto del problema.
+
+![alt text](images/image.png)
 ### **Complicaciones:**
  
 •	Las complicaciones y obstáculos encontrados a la hora del desarrollo del proyecto fueron:
@@ -75,3 +80,4 @@ Estas siguen el estándar solicitado por el docente en la consigna del taller.
 o	Errores en la inicialización del proyecto entre los integrantes. Al iniciar con la descarga de las librerías una de ellas no funcionaba del todo, por lo que, se investigó sobre las versiones o posibles problemas de compatibilidad. Al final de pudo resolver.
 
 o	Planeación del modelo de datos. Fue difícil pensar que cual es el modelo más afín a lo que el profesor espera de nosotros. Teniamos dudas en la relación entre un organizador y los eventos que este mismo creaba para poder así tener el control de eliminarlos o editarlos.
+
