@@ -1,5 +1,8 @@
 import { object, string, array } from 'zod';
 
+/**
+ * Represents the schema for a user.
+ */
 const userSchema = object({
     name: string({ required_error: "Name is required" }),
     email: string({ required_error: "Email is required" })

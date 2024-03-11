@@ -3,6 +3,13 @@ import jwt, { TokenExpiredError } from "jsonwebtoken";
 import User from "../models/user.models";
 import Role from "../models/role.models";
 
+/**
+ * Middleware for authentication.
+ * 
+ * @param req - The request object.
+ * @param res - The response object.
+ * @param next - The next function to call.
+ */
 const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
         let token = req.headers.authorization;
@@ -26,6 +33,14 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+/**
+ * Middleware function to verify if the user has the "organizer" role.
+ * 
+ * @param req - The Express request object.
+ * @param res - The Express response object.
+ * @param next - The next middleware function.
+ * @returns If the user has the "organizer" role, calls the next middleware function. Otherwise, returns a 403 Forbidden response.
+ */
 const verifyRole = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const userId = req.params.id;

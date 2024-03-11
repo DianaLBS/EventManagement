@@ -1,5 +1,8 @@
 import { object, string, date, z } from 'zod';
 
+/**
+ * Schema for an event.
+ */
 const eventSchema = object({
     title: string().min(1, { message: "Title is required" }),
     description: string().min(1, { message: "Description is required" }),

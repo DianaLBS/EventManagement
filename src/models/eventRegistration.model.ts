@@ -1,17 +1,24 @@
 import mongoose from "mongoose";
 
 
-// Define the structure of the event data in the database
+/**
+ * Represents the input for creating an event registration.
+ */
 export interface EventRegistrationInput {
     user: mongoose.Types.ObjectId; // Referencia al ID del usuario
     event: mongoose.Types.ObjectId; // Referencia al ID del evento
 }
 
-// Define the document structure for mongoose, includes both Event and mongoose.Document properties
+/**
+ * Represents a registration document that extends the EventRegistrationInput interface and the mongoose.Document interface.
+ */
 export interface RegistrationDocument extends EventRegistrationInput, mongoose.Document {
     
 }
 
+/**
+ * Represents the registration schema for an event registration.
+ */
 const registrationSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     event: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },

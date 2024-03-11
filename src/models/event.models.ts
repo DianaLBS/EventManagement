@@ -1,14 +1,38 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// Define the structure of the event data in the database
+/**
+ * Represents the input data for creating an event.
+ */
 export interface EventInput {
+    /**
+     * The title of the event.
+     */
     title: string;
-    description: string;
-    date: string;
-    time: string;
-    location: string;
-    registrations?: mongoose.Types.ObjectId[];
     
+    /**
+     * The description of the event.
+     */
+    description: string;
+    
+    /**
+     * The date of the event.
+     */
+    date: string;
+    
+    /**
+     * The time of the event.
+     */
+    time: string;
+    
+    /**
+     * The location of the event.
+     */
+    location: string;
+    
+    /**
+     * Optional array of registration IDs associated with the event.
+     */
+    registrations?: mongoose.Types.ObjectId[];
 }
 
 // Define the document structure for mongoose, includes both Event and mongoose.Document properties
@@ -20,7 +44,9 @@ export interface EventDocument extends EventInput, mongoose.Document {
     
 }
 
-// Define the schema that will be used for data validation
+/**
+ * Represents the schema for an event in the application.
+ */
 const EventSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
