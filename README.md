@@ -73,6 +73,16 @@ Estas siguen el estándar solicitado por el docente en la consigna del taller.
 * Para comprobar el funcionamiento de nuestra aplicación web, se vio la necesidad de probar sus funcionalidades con la herramienta "Postman". Esta permite visualizar la respuesta HTTP que se hace al cliente. En esta herramienta probamos los diferentes métodos HTTP (get,post,put,delete) adaptados al contexto del problema.
 
 ![alt text](images/image.png)
+
+### **Despliegue:**
+
+* El despliegue de la aplicación web se hizo con la ayuda de la herramienta vercel. Con esto, podemos evidenciar lo siguente:
+
+![alt text](images/despliegue.jpg)
+
+[Despliegue vercel - 1](https://eventmanagement-rho.vercel.app/)
+
+[Despliegue vercel - 2](https://vercel.com/danna-espinosas-projects/eventmanagement/CnQnngNDU1mE2Uu9J56zZdEZnpbw)
 ### **Complicaciones:**
  
 •	Las complicaciones y obstáculos encontrados a la hora del desarrollo del proyecto fueron:
