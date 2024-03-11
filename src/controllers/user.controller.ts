@@ -4,8 +4,18 @@ import Role from "../models/role.models";
 import { UserDocument, UserInput } from "../models/user.models";
 import bcrypt from "bcrypt";
 
-class userController {
+/**
+ * Controller for user management.
+ */
+class UserController {
     
+    /**
+     * Creates a new user.
+     * 
+     * @param {Request} req - The HTTP request object.
+     * @param {Response} res - The HTTP response object.
+     * @returns {Promise<Response>} The HTTP response with the created user.
+     */
     public async create(req: Request, res: Response){
         try {
             const userExists: UserDocument | null = await userService.findByEmail(req.body.email);
@@ -29,16 +39,30 @@ class userController {
         }
     }
 
+    /**
+     * Gets all users.
+     * 
+     * @param req - The HTTP request.
+     * @param res - The HTTP response.
+     * @returns A JSON response with all the found users.
+     */
     public async getUsers(req: Request, res: Response) {
 
         try {
-            const users = await userService.findAll(); //Tiene que esperar que esto termine para continuar
+            const users = await userService.findAll(); // It has to wait for this to finish before continuing
             res.json(users);        
         } catch(error) {
             return res.status(500).json(error)
         }
     }
 
+    /**
+     * Finds a user by its ID.
+     * 
+     * @param req - The HTTP request object.
+     * @param res - The HTTP response object.
+     * @returns An HTTP response with the found user or an error message if not found.
+     */
     public async findById(req: Request, res: Response){
         try {
             const user: UserDocument | null = await userService.findById(req.params.id);
@@ -53,6 +77,13 @@ class userController {
         }
     }
 
+    /**
+     * Updates an existing user.
+     * 
+     * @param {Request} req - The HTTP request object.
+     * @param {Response} res - The HTTP response object.
+     * @returns {Promise<Response>} - A promise that resolves to the HTTP response with the updated user.
+     */
     public async update(req: Request, res: Response){
         try {
             const userExists: UserDocument | null = await userService.findById(req.params.id);
@@ -70,6 +101,15 @@ class userController {
         }
     }
 
+    /**
+     * Deletes a user by its ID.
+     * 
+     * @param req - The HTTP request.
+     * @param res - The HTTP response.
+     * @returns A JSON response with the message "User has been deleted" if the user was successfully deleted.
+     *          If the user is not found, a JSON response with the message "User not found" is returned.
+     *          If an error occurs during the process, a JSON response with the status code 500 and the error is returned.
+     */
     public async delete(req: Request, res: Response){
         try {
 
@@ -87,6 +127,13 @@ class userController {
         }
     }
 
+    /**
+     * Performs user login.
+     * 
+     * @param req - The HTTP request containing the user login data.
+     * @param res - The HTTP response to be sent to the client.
+     * @returns A JSON object containing the authentication token if the login is successful, or an error message if it is not.
+     */
     public async login(req: Request, res: Response){
         try {
             const userExists: UserDocument | null = await userService.findByEmail(req.body.email);
@@ -110,4 +157,4 @@ class userController {
 
 }
 
-export default new userController();
+export default new UserController();
