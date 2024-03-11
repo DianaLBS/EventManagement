@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { EventDocument } from "../models/event.models";
 import eventService from "../services/event.service";
 import Type from "../models/type.models";
+import User from "../models/user.models"
 /**
  * Controller for event management.
  */
@@ -15,16 +16,17 @@ class EventController {
      */
     public async create(req: Request, res: Response) {
         try {
-
+        
             const eventType = await Type.findOne({ name: req.body.eventType });
 
             if (!eventType) {
                 return res.status(400).json({ error: 'Event type not found' });
             }
 
+
             const event: EventDocument = await eventService.createEvent({
                 ...req.body,
-                eventType: eventType._id
+                eventType: eventType._id,
             });
             return res.status(201).json(event);
         } catch (error) {
@@ -138,3 +140,7 @@ class EventController {
 }
 
 export default new EventController();
+function verifyToken(token: string | undefined) {
+    throw new Error("Function not implemented.");
+}
+
