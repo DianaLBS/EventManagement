@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
-import { EventDocument } from "../models/event.models";
+import { EventDocument, EventModel } from "../models/event.models";
 import eventService from "../services/event.service";
 import Type from "../models/type.models";
+import registrationService from "../services/registration.service";
+import User, { UserDocument } from "../models/user.models";
+import userService from "../services/user.service";
 /**
  * Controller for event management.
  */
@@ -17,6 +20,7 @@ class EventController {
         try {
 
             const eventType = await Type.findOne({ name: req.body.eventType });
+            const user: UserDocument | null = await userService.findById(req.params.id);
 
             if (!eventType) {
                 return res.status(400).json({ error: 'Event type not found' });
@@ -24,7 +28,8 @@ class EventController {
 
             const event: EventDocument = await eventService.createEvent({
                 ...req.body,
-                eventType: eventType._id
+                eventType: eventType._id,
+                createdBy: user?._id
             });
             return res.status(201).json(event);
         } catch (error) {
@@ -135,6 +140,61 @@ class EventController {
             return res.status(500).json(error);
         }
     }
+
+        /**
+     * Endpoint para que los usuarios se inscriban en un evento.
+     * @param req - El objeto de solicitud HTTP.
+     * @param res - El objeto de respuesta HTTP.
+     * @returns El evento actualizado con la nueva inscripción.
+     */
+        public async registerForEvent(req: Request, res: Response) {
+            try {
+                const userId = req.params.id; // Obtén el ID del usuario autenticado desde el token
+                const eventId = req.params.eventId; // Obtén el ID del evento desde los parámetros de ruta
+                const registration = await registrationService.registerUserForEvent(userId, eventId);
+                // Actualiza el usuario con el nuevo registro
+                await User.findByIdAndUpdate(userId, { $push: { registrations: registration._id } });
+
+                // Actualiza el evento con el nuevo registro
+                await EventModel.findByIdAndUpdate(eventId, { $push: { registrations: registration._id } });
+                return res.status(200).json(registration);
+            } catch (error) {
+                return res.status(500).json(error);
+            }
+        }
+    
+        /**
+         * Endpoint para que los usuarios vean los eventos en los que están inscritos.
+         * @param req - El objeto de solicitud HTTP.
+         * @param res - El objeto de respuesta HTTP.
+         * @returns Una lista de eventos en los que está inscrito el usuario.
+         */
+        public async getRegisteredEvents(req: Request, res: Response) {
+            try {
+                const userId = req.params.id; // Obtén el ID del usuario autenticado desde el token
+                const registeredEvents = await registrationService.getRegisteredEventsByUserId(userId);
+                return res.status(200).json(registeredEvents);
+            } catch (error) {
+                return res.status(500).json(error);
+            }
+        }
+    
+        /**
+         * Endpoint para que los organizadores vean una lista de asistentes para sus eventos.
+         * @param req - El objeto de solicitud HTTP.
+         * @param res - El objeto de respuesta HTTP.
+         * @returns Una lista de usuarios inscritos en el evento del organizador.
+         */
+        public async getAttendeesForEvent(req: Request, res: Response) {
+            try {
+                const eventId = req.params.eventId; // Obtén el ID del evento desde los parámetros de ruta
+                const attendees = await registrationService.getAttendeesForEvent(eventId);
+                return res.status(200).json(attendees);
+            } catch (error) {
+                return res.status(500).json(error);
+            }
+        }
+    
 }
 
 export default new EventController();
