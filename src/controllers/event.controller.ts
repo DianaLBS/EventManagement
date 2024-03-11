@@ -112,6 +112,12 @@ class EventController {
                 return res.status(404).json({ message: "Event not found controller" });
             }
 
+             // Verifica si el usuario que realiza la solicitud es el mismo que creó el evento
+            if (event.createdBy.toString() !== req.params.id) {
+                return res.status(403).json({ message: "You are not authorized to update this event" });
+            }
+
+
             const updatedEvent: EventDocument | null = await eventService.updateEvent(req.params.idevent, req.body);
             return res.status(200).json(updatedEvent);
         } catch (error) {
@@ -128,13 +134,17 @@ class EventController {
      */
     public async delete(req: Request, res: Response) {
         try {
-            const eventExists: EventDocument | null = await eventService.getEventById(req.params.idevent);
+            const event: EventDocument | null = await eventService.getEventById(req.params.idevent);
 
-            if (!eventExists) {
+            if (!event) {
                 return res.status(404).json({ message: "Event not found" });
             }
 
-            const  event : EventDocument | null = await eventService.deleteEvent(req.params.idevent);
+            if (event.createdBy.toString() !== req.params.id) {
+                return res.status(403).json({ message: "You are not authorized to delete this event" });
+            }
+
+            const  deleteEvent : EventDocument | null = await eventService.deleteEvent(req.params.idevent);
             return res.status(200).json({ message: "Event has been deleted {event}" });
         } catch (error) {
             return res.status(500).json(error);
