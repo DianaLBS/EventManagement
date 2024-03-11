@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { EventDocument } from "../models/event.models";
 import eventService from "../services/event.service";
-import TypeModel from "../models/type.models";
+import Type from "../models/type.models";
 /**
  * Controller for event management.
  */
@@ -16,7 +16,7 @@ class EventController {
     public async create(req: Request, res: Response) {
         try {
 
-            const eventType = await TypeModel.findOne({ name: req.body.eventType });
+            const eventType = await Type.findOne({ name: req.body.eventType });
 
             if (!eventType) {
                 return res.status(400).json({ error: 'Event type not found' });
@@ -42,26 +42,32 @@ class EventController {
      */
     public async getEvents(req: Request, res: Response) {
         try {
-          const { date, location, type } = req.query;
-      
-        let filter: any = {};
+            const { date, location, eventType } = req.query;
+        
+            let filter: any = {};
 
-        if (date) {
-            filter.date = date;
-        }
+            if (date) {
+                filter.date = date;
+            }
 
-        if (location) {
-            filter.location = location;
-        }
+            if (location) {
+                filter.location = location;
+            }
 
-        if (type) {
-            filter.type = type;
-        }
+            if (eventType) {
+                const eventTypeObj = await Type.findOne({ name: eventType });
 
-        const events: EventDocument[] = await eventService.getAllEvents(filter);
-          return res.status(200).json(events);
+                if (!eventTypeObj) {
+                    return res.status(400).json({ error: 'Event type not found' });
+                }
+
+                filter.eventType = eventTypeObj._id;
+            }
+
+            const events: EventDocument[] = await eventService.getAllEvents(filter);
+            return res.status(200).json(events);
         } catch (error) {
-          return res.status(500).json(error);
+            return res.status(500).json(error);
         }
     }
 

@@ -4,7 +4,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface EventInput {
     title: string;
     description: string;
-    date: Date;
+    date: string;
     time: string;
     location: string;
     
@@ -15,20 +15,19 @@ export interface EventDocument extends EventInput, mongoose.Document {
     createdAt: Date;
     upDatedAt: Date;
     deletedAt: Date; 
-    eventType: mongoose.Schema.Types.ObjectId[];
-    createdBy: mongoose.Schema.Types.ObjectId;
+    
 }
 
 // Define the schema that will be used for data validation
-const EventSchema = new Schema<EventDocument>({
+const EventSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     time: { type: String, required: true },
     location: { type: String, required: true },
-    eventType: [{ ref: "Type", type: mongoose.Schema.Types.ObjectId, required: true }],
+    eventType: { ref: "Type", type: mongoose.Schema.Types.ObjectId, required: true },
     createdBy: { ref: "User", type: mongoose.Schema.Types.ObjectId, required: true },
-}, { timestamps: true, collection: "events" });
+}, { timestamps: true });
 
 // Create the model in db
 const EventModel = mongoose.model<EventDocument>('Event', EventSchema);
