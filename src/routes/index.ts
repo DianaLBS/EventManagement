@@ -20,8 +20,8 @@ const routes = (app: Express) => {
     app.post('/event', auth, validateSchema(eventSchema), eventController.create);
     app.get('/event', eventController.getEvents);
     app.get('/event/:id', eventController.getById);
-    app.put('/event/:id', auth, eventController.update);
-    app.delete('/event/:id', auth, eventController.delete);
+    app.put('/event/:idevent', auth, eventController.update);
+    app.delete('/event/:idevent', auth, eventController.delete);
     
 };
 

@@ -10,6 +10,7 @@ export interface UserDocument extends UserInput, mongoose.Document {
     createdAt: Date;
     upDatedAt: Date;
     deletedAt: Date; 
+    roles: mongoose.Schema.Types.ObjectId[];
 }
 
 const userSchema = new mongoose.Schema({

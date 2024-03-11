@@ -1,5 +1,4 @@
-import { EventModel, EventDocument } from "../models/event.models";
-import { UserDocument } from "../models/user.models";
+import { EventModel, EventDocument , EventInput} from "../models/event.models";
 
 /**
  * Service class for managing events.
@@ -45,15 +44,15 @@ class EventService {
      * @returns A promise that resolves to the updated event, or null if not found.
      * @throws An error if the event is not found.
      */
-    public async updateEvent(id: string, eventData: Partial<EventDocument>): Promise<EventDocument | null> {
-        const event: EventDocument | null = await EventModel.findById(id);
-
-        if (!event) {
-            throw new Error("Event not found- service");
+    public async updateEvent(id: string, eventInput:EventInput): Promise<EventDocument | null> {
+        try {
+            const event: EventDocument | null = await EventModel.findOneAndUpdate({_id: id}, eventInput, {
+                returnOriginal: false
+            });
+            return event;
+        } catch(error) {
+            throw error;
         }
-
-        const updatedEvent: EventDocument | null = await EventModel.findByIdAndUpdate(id, eventData, { new: true });
-        return updatedEvent;
     }
 
     /**
@@ -62,14 +61,12 @@ class EventService {
      * @returns A promise that resolves when the event is deleted.
      * @throws An error if the user is not authorized to delete the event.
      */
-    public async deleteEvent(id: string): Promise<void> {
-        const event: EventDocument | null = await EventModel.findById(id);
-
-        if (!event) {
-            throw new Error("Event not found");
+    public async deleteEvent(id: string): Promise<EventDocument | null> {
+        try { 
+            return await EventModel.findOneAndDelete({_id: id});
+        } catch(error) {
+            throw error;
         }
-
-        await EventModel.findByIdAndDelete(id);
     }
 }
 

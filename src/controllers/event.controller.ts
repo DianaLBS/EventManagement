@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
-import { UserDocument } from "../models/user.models";
-import { EventModel, EventDocument } from "../models/event.models";
-import EventService from "../services/event.service"; // Import the EventService class using default import
+import { EventDocument } from "../models/event.models";
 import eventService from "../services/event.service";
-
+import TypeModel from "../models/type.models";
 /**
  * Controller for event management.
  */
@@ -17,7 +15,17 @@ class EventController {
      */
     public async create(req: Request, res: Response) {
         try {
-            const event: EventDocument = await eventService.createEvent(req.body);
+
+            const eventType = await TypeModel.findOne({ name: req.body.eventType });
+
+            if (!eventType) {
+                return res.status(400).json({ error: 'Event type not found' });
+            }
+
+            const event: EventDocument = await eventService.createEvent({
+                ...req.body,
+                eventType: eventType._id
+            });
             return res.status(201).json(event);
         } catch (error) {
             return res.status(500).json(error);
@@ -66,7 +74,8 @@ class EventController {
      */
     public async getById(req: Request, res: Response) {
         try {
-            const event: EventDocument | null = await eventService.getEventById(req.params.id);
+            const event: EventDocument | null = await eventService.getEventById(req.params.idevent);
+            
             if (!event) {
                 return res.status(404).json({ message: "Event not found getbyid" });
             }
@@ -86,12 +95,13 @@ class EventController {
      */
     public async update(req: Request, res: Response) {
         try {
-            const event: EventDocument | null = await eventService.getEventById(req.params.id);
+            const event: EventDocument | null = await eventService.getEventById(req.params.idevent);
+            
             if (!event) {
                 return res.status(404).json({ message: "Event not found controller" });
             }
 
-            const updatedEvent: EventDocument | null = await eventService.updateEvent(req.params.id, req.body);
+            const updatedEvent: EventDocument | null = await eventService.updateEvent(req.params.idevent, req.body);
             return res.status(200).json(updatedEvent);
         } catch (error) {
             return res.status(500).json(error);
@@ -107,13 +117,13 @@ class EventController {
      */
     public async delete(req: Request, res: Response) {
         try {
-            const eventExists: EventDocument | null = await eventService.getEventById(req.params.id);
+            const eventExists: EventDocument | null = await eventService.getEventById(req.params.idevent);
 
             if (!eventExists) {
                 return res.status(404).json({ message: "Event not found" });
             }
 
-            const  event : EventDocument | null = await eventService.deleteEvent(req.params.id);
+            const  event : EventDocument | null = await eventService.deleteEvent(req.params.idevent);
             return res.status(200).json({ message: "Event has been deleted {event}" });
         } catch (error) {
             return res.status(500).json(error);
