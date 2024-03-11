@@ -2,11 +2,12 @@ import express, {Express, Request, Response} from "express";
 import dotenv from 'dotenv';
 import {db} from './config/db';
 import routes from "./routes";
-import {createRoles} from './libs/initialSetup';
+import {createRoles, createEventTypes} from './libs/initialSetup';
 
 const app: Express = express();
 dotenv.config();
-createRoles();
+createRoles().catch(console.error);
+createEventTypes().catch(console.error);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
