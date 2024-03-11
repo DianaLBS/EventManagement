@@ -16,11 +16,15 @@ const routes = (app: Express) => {
     app.get('/users/:id', auth, userController.findById);
     app.post('/login/', userController.login);
     //Events
-    app.post('/event', auth, validateSchema(eventSchema), eventController.create);
-    app.get('/event', eventController.getEvents);
-    app.get('/event/:id', eventController.getById);
-    app.put('/event/:idevent', auth, eventController.update);
-    app.delete('/event/:idevent', auth, eventController.delete);
+    app.post('/event', auth,verifyRole, validateSchema(eventSchema), eventController.create);
+    app.get('/event',auth, eventController.getEvents);
+    app.get('/event/:id',auth, eventController.getById);
+    app.put('/event/:idevent', auth,verifyRole, eventController.update);
+    app.delete('/event/:idevent', auth,verifyRole, eventController.delete);
+
+    app.post("/event/:eventId/", auth, eventController.registerForEvent);
+    app.get("/eventsRegistered", auth, eventController.getRegisteredEvents);
+    app.get("/eventAttendees/:eventId", auth,verifyRole, eventController.getAttendeesForEvent);
     
 };
 

@@ -7,6 +7,7 @@ export interface EventInput {
     date: string;
     time: string;
     location: string;
+    registrations?: mongoose.Types.ObjectId[];
     
 }
 
@@ -15,6 +16,7 @@ export interface EventDocument extends EventInput, mongoose.Document {
     createdAt: Date;
     upDatedAt: Date;
     deletedAt: Date; 
+    createdBy: mongoose.Types.ObjectId;
     
 }
 
@@ -26,7 +28,8 @@ const EventSchema = new mongoose.Schema({
     time: { type: String, required: true },
     location: { type: String, required: true },
     eventType: { ref: "Type", type: mongoose.Schema.Types.ObjectId, required: true },
-    createdBy: { ref: "User", type: mongoose.Schema.Types.ObjectId, required: true },
+    createdBy: { ref: "User", type: mongoose.Schema.Types.ObjectId },
+    registrations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Registration' }], // Nuevo campo para inscripcioness
 }, { timestamps: true });
 
 // Create the model in db

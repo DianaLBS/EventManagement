@@ -63,7 +63,7 @@ class UserService {
         try { 
             return jwt.sign({user_id: user.id, email:user.email}, 
                 process.env.JWT_SECRET || "secret",
-                {expiresIn: "5m"});
+                {expiresIn: "1h"});
         } catch(error) {
             throw error;
         }
