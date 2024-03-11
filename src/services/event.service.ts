@@ -30,8 +30,12 @@ class EventService {
      * @returns A promise that resolves to the event, or null if not found.
      */
     public async getEventById(id: string): Promise<EventDocument | null> {
-        const event: EventDocument | null = await EventModel.findById(id);
-        return event;
+        try {
+            const event = await EventModel.findById(id);
+            return event;
+        } catch(error) {
+            throw error;
+        }
     }
 
     /**
@@ -45,7 +49,7 @@ class EventService {
         const event: EventDocument | null = await EventModel.findById(id);
 
         if (!event) {
-            throw new Error("Event not found");
+            throw new Error("Event not found- service");
         }
 
         const updatedEvent: EventDocument | null = await EventModel.findByIdAndUpdate(id, eventData, { new: true });
