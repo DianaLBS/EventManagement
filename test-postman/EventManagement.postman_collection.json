@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "ec200937-38a1-4060-8f79-3fa88bf47987",
+		"name": "EventManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29333467",
+		"_collection_link": "https://www.postman.com/crimson-astronaut-88470/workspace/taskmanagement/collection/29333467-ec200937-38a1-4060-8f79-3fa88bf47987?action=share&source=collection_link&creator=29333467"
+	},
+	"item": [
+		{
+			"name": "create user - assistant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Carlos Bolaños\",\r\n    \"email\": \"bocarlos68@gmail.com\",\r\n    \"password\": \"carlos123\",\r\n    \"roles\":[\"assistant\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user - organizer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Mauricio Gomez\",\r\n    \"email\": \"kmauro12@gmail.com\",\r\n    \"password\": \"mauricio123\",\r\n    \"roles\":[\"organizer\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login - assistant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"bocarlos68@gmail.com\",\r\n    \"password\":\"carlos123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login - organizer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"kmauro12@gmail.com\",\r\n    \"password\":\"mauricio123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjE4NTksImV4cCI6MTcxMDE2NTQ1OX0.nwCqHB1n75a6ZCXDsTNRm4iF-pgZz-GhFEwgsqPiLfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by id user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjE4NTksImV4cCI6MTcxMDE2NTQ1OX0.nwCqHB1n75a6ZCXDsTNRm4iF-pgZz-GhFEwgsqPiLfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/65eefb6f7adaadaf83387c1f",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"65eefb6f7adaadaf83387c1f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjE4NTksImV4cCI6MTcxMDE2NTQ1OX0.nwCqHB1n75a6ZCXDsTNRm4iF-pgZz-GhFEwgsqPiLfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Mauricio Gomez Caicedo\",\r\n    \"email\": \"kmauro12@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users/65eefb6f7adaadaf83387c1f",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"65eefb6f7adaadaf83387c1f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjE4NTksImV4cCI6MTcxMDE2NTQ1OX0.nwCqHB1n75a6ZCXDsTNRm4iF-pgZz-GhFEwgsqPiLfQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/65eefb6f7adaadaf83387c1f",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"65eefb6f7adaadaf83387c1f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjM5OTYsImV4cCI6MTcxMDE2NzU5Nn0.CTXNBRbU_f8yHB2PjlCEIetJf2V9U81AD0mnrkiSo0c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjI2NjEsImV4cCI6MTcxMDE2NjI2MX0.KssyF3V0tPBZhExesf9lEw_C3jasTbL7TxV92NqxBrk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Grados Icesi\",\r\n    \"description\":\"This a event in Icesi\",\r\n    \"date\":\"2023-12-31\",\r\n    \"time\":\"12:00\",\r\n    \"location\":\"Cali, Pance, Colombia\",\r\n    \"eventType\":\"seminar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/event/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get event by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjQ0MTQsImV4cCI6MTcxMDE2ODAxNH0.VKTe1iXfEurF-q8FgXSR2InQn86cd4ZxJJBViHcmKzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/event/65ef08ac468ae86c9eca46ff",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						"65ef08ac468ae86c9eca46ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all events",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjQ0MTQsImV4cCI6MTcxMDE2ODAxNH0.VKTe1iXfEurF-q8FgXSR2InQn86cd4ZxJJBViHcmKzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/event/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjQ0MTQsImV4cCI6MTcxMDE2ODAxNH0.VKTe1iXfEurF-q8FgXSR2InQn86cd4ZxJJBViHcmKzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Grados Icesi - Pregrado\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/event/65ef08ac468ae86c9eca46ff",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						"65ef08ac468ae86c9eca46ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register on event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWY2NWQ3YWRhYWRhZjgzMzg3YzBhIiwiZW1haWwiOiJib2NhcmxvczY4QGdtYWlsLmNvbSIsImlhdCI6MTcxMDE2NDg3MCwiZXhwIjoxNzEwMTY4NDcwfQ.gCGr7FTWrjDpnIX403inTpfwIKZx6ztLHK8AMV0uvRg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":\"65eef65d7adaadaf83387c0a\",\r\n    \"event\":\"65ef08ac468ae86c9eca46ff\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/event/65ef08ac468ae86c9eca46ff",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						"65ef08ac468ae86c9eca46ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registered events",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWY2NWQ3YWRhYWRhZjgzMzg3YzBhIiwiZW1haWwiOiJib2NhcmxvczY4QGdtYWlsLmNvbSIsImlhdCI6MTcxMDE2NDg3MCwiZXhwIjoxNzEwMTY4NDcwfQ.gCGr7FTWrjDpnIX403inTpfwIKZx6ztLHK8AMV0uvRg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/eventsRegistered",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"eventsRegistered"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get attendees for event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjQ0MTQsImV4cCI6MTcxMDE2ODAxNH0.VKTe1iXfEurF-q8FgXSR2InQn86cd4ZxJJBViHcmKzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/eventAttendees/65ef08ac468ae86c9eca46ff",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"eventAttendees",
+						"65ef08ac468ae86c9eca46ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZWZiNmY3YWRhYWRhZjgzMzg3YzFmIiwiZW1haWwiOiJrbWF1cm8xMkBnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjQ0MTQsImV4cCI6MTcxMDE2ODAxNH0.VKTe1iXfEurF-q8FgXSR2InQn86cd4ZxJJBViHcmKzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/event/65ef08ac468ae86c9eca46ff",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"event",
+						"65ef08ac468ae86c9eca46ff"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
