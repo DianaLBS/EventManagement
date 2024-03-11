@@ -1,18 +1,17 @@
 import { Express } from "express";
 
 import userController from "../controllers/user.controller";
-import auth from "../middlewares/auth";
-//import validateRole from "../middlewares/validateRole";
+import { auth, verifyRole } from "../middlewares/auth";
 import validateSchema from "../middlewares/validateSchema";
-import  userSchema  from "../schemas/user.schema";
+import userSchema from "../schemas/user.schema";
 
 const routes = (app: Express) => {
-    app.get('/users', userController.getUsers);
+    app.get('/users', auth,userController.getUsers);
     app.post('/users', validateSchema(userSchema), userController.create);
-    app.put('/users/:id', userController.update );
-    app.delete('/users/:id', userController.delete );
-    app.get('/users/profile', auth, userController.findById);
-    app.get('/users/:id', userController.findById);
+    app.put('/users/:id',auth, userController.update );
+    app.delete('/users/:id',auth, verifyRole, userController.delete );
+    app.get('/users/profile',auth,verifyRole, userController.findById);
+    app.get('/users/:id', auth, userController.findById);
     app.post('/login/', userController.login);
 };
 

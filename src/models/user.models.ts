@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { model } from "mongoose";
 
 export interface UserInput {
     name: string;
     email: string; 
     password: string;
+    roles: string[];
 }
 
 export interface UserDocument extends UserInput, mongoose.Document {
