@@ -7,6 +7,10 @@ import validateSchema from "../middlewares/validateSchema";
 import  userSchema  from "../schemas/user.schema";
 import  eventSchema  from "../schemas/event.schema";
 
+/**
+ * Registers all the routes for the application.
+ * @param {Express} app - The Express application instance.
+ */
 const routes = (app: Express) => {
     app.get('/users', auth,userController.getUsers);
     app.post('/users', validateSchema(userSchema), userController.create);
@@ -16,11 +20,15 @@ const routes = (app: Express) => {
     app.get('/users/:id', auth, userController.findById);
     app.post('/login/', userController.login);
     //Events
-    app.post('/event', auth, validateSchema(eventSchema), eventController.create);
-    app.get('/event', eventController.getEvents);
-    app.get('/event/:id', eventController.getById);
-    app.put('/event/:idevent', auth, eventController.update);
-    app.delete('/event/:idevent', auth, eventController.delete);
+    app.post('/event', auth,verifyRole, validateSchema(eventSchema), eventController.create);
+    app.get('/event',auth, eventController.getEvents);
+    app.get('/event/:id',auth, eventController.getById);
+    app.put('/event/:idevent', auth,verifyRole, eventController.update);
+    app.delete('/event/:idevent', auth,verifyRole, eventController.delete);
+    //Register for event
+    app.post("/event/:eventId/", auth, eventController.registerForEvent);
+    app.get("/eventsRegistered", auth, eventController.getRegisteredEvents);
+    app.get("/eventAttendees/:eventId", auth,verifyRole, eventController.getAttendeesForEvent);
     
 };
 

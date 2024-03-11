@@ -12,6 +12,11 @@ createEventTypes().catch(console.error);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+/**
+ * The port number for the server.
+ * If the `PORT` environment variable is set, it will use that value.
+ * Otherwise, it will default to 3000.
+ */
 const port = process.env.PORT || 3000;
 
 app.get('/', (req: Request, res: Response) => {
