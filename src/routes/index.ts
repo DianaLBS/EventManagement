@@ -2,7 +2,7 @@ import { Express } from "express";
 
 import userController from "../controllers/user.controller";
 import { auth, verifyRole } from "../middlewares/auth";
-import eventController from "../controllers/event.controller";
+import  eventController  from "../controllers/event.controller";
 import validateSchema from "../middlewares/validateSchema";
 import  userSchema  from "../schemas/user.schema";
 import  eventSchema  from "../schemas/event.schema";
@@ -22,7 +22,7 @@ const routes = (app: Express) => {
     //Events
     app.post('/event', auth,verifyRole, validateSchema(eventSchema), eventController.create);
     app.get('/event',auth, eventController.getEvents);
-    app.get('/event/:id',auth, eventController.getById);
+    app.get('/event/:idevent',auth, eventController.getById);
     app.put('/event/:idevent', auth,verifyRole, eventController.update);
     app.delete('/event/:idevent', auth,verifyRole, eventController.delete);
     //Register for event

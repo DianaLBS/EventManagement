@@ -88,7 +88,8 @@ class EventController {
     public async getById(req: Request, res: Response) {
         try {
             const event: EventDocument | null = await eventService.getEventById(req.params.idevent);
-            
+            console.log(req.params.idevent)
+            console.log(event)
             if (!event) {
                 return res.status(404).json({ message: "Event not found getbyid" });
             }
@@ -207,3 +208,5 @@ class EventController {
             }
         }
     }
+
+export default new EventController();
